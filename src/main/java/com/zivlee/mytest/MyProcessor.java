@@ -14,7 +14,7 @@ public class MyProcessor {
 //        MyPipeline myPipeline = new MyPipeline();
         NullPipeline nullPipeline = new NullPipeline();
         Spider.create(new FirstProcessor())
-                .addUrl("http://www.funtl.com/zh/guide/走向单体地狱.html")
+                .addUrl("http://www.funtl.com/zh/guide/Docs-docker.html")
                 .addPipeline(nullPipeline)
                 //设置Pipeline，将结果以json方式保存到文件
 //                .addPipeline(new JsonFilePipeline("D:\\data\\webmagic"))

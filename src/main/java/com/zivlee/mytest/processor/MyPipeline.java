@@ -32,6 +32,9 @@ public class MyPipeline implements Pipeline {
 //        msg.insert(i-8,"http://www.funtl.com");
         String message;
         message = content.replace("src=\"/assets1","src=\"http://www.funtl.com/assets1");
+        message = message.replace(" &lt;"," <");
+        message = message.replace("&lt;/","</ ");
+        message = message.replace("&gt;",">");
         message = message.replaceAll("<svg(([\\s\\S])*?)<\\/svg>"," ");
         message = message.replaceAll("<div class=\"line-numbers-wrapper\"(([\\s\\S])*?)<\\/div>"," ");
 
@@ -41,12 +44,13 @@ public class MyPipeline implements Pipeline {
 //            picture = pic.toString();
 //        }
 
-        File dir = new File("D:\\data\\webmagic\\单体应用\\" + parentTitle);
+        String url = "D:\\data\\webmagic\\Docker\\"+FirstProcessor.number+"_"+ parentTitle;
+        File dir = new File(url);
         if(!dir.exists()){
             dir.mkdirs();
         }
 
-        File file = new File("D:\\data\\webmagic\\单体应用\\"+parentTitle+"\\"+title+".md");//保存文件地址
+        File file = new File(url+"\\"+title+".md");//保存文件地址
         try(FileOutputStream fop = new FileOutputStream(file)) {
             if (!file.exists()) {
                 file.createNewFile();

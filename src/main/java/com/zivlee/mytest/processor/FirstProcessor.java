@@ -16,13 +16,23 @@ import java.util.List;
  * @version: V1.0.0
  */
 public class FirstProcessor implements PageProcessor {
+    public static String number;
     private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
     @Override
     public void process(Page page) {
 //        page.addTargetRequests(page.getHtml().xpath("//*[@id=\"app\"]/div/div[3]/div[1]/p/a/@href").all());
         List<String> list = page.getHtml().xpath("//*[@id=\"app\"]/div/div[3]/div[1]/p/a/@href").all();
-        for (String url : list) {
-            System.out.println("路经："+url);
+        int size = list.size();
+        String url;
+        for (int i = 0; i < size; i++) {
+            url = list.get(i);
+            if(i < 9){
+                number = "0"+(i+1);
+            }
+            else{
+                number=""+(i+1);
+            }
+            System.out.println(number+"路经："+url);
             MyProcessor.getData("http://www.funtl.com"+url,new SecondProcessor(),new MyPipeline());
         }
     }
