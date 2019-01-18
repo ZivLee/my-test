@@ -1,11 +1,8 @@
 package com.zivlee.mytest;
 
 import com.zivlee.mytest.processor.FirstProcessor;
-import com.zivlee.mytest.processor.MyPipeline;
 import com.zivlee.mytest.processor.NullPipeline;
-import com.zivlee.mytest.processor.SecondProcessor;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
@@ -37,7 +34,7 @@ public class MyProcessor {
                 .addUrl(url)
                 .addPipeline(pipeline)
                 //设置Pipeline，将结果以json方式保存到文件
-//                .addPipeline(new JsonFilePipeline("D:\\data\\webmagic"))
+//                  .addPipeline(new JsonFilePipeline("D:\\data\\webmagic"))
                 .thread(5)
                 .run();
     }

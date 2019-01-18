@@ -18,6 +18,7 @@ public abstract class BaseProcessor implements PageProcessor {
     }
     protected void putField(Page page, String urlXpath){
         page.addTargetRequests(page.getHtml().xpath(urlXpath).all());
+        page.putField("parentTitle", page.getHtml().xpath("//*[@id=\"app\"]/div/div[2]/ul/li/div/p/span/text()"));
         page.putField("title", page.getHtml().xpath("//*[@id=\"app\"]/div/div[3]/div[1]/h1/@id"));
         //获取标签中所有的内容(包括标签)
         page.putField("content", page.getHtml().xpath("//*[@id=\"app\"]/div/div[3]/div[1]").toString());

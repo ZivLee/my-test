@@ -25,12 +25,15 @@ public class MyPipeline implements Pipeline {
 
     public void process(ResultItems resultItems, Task task) {
         String title = resultItems.get("title").toString();
+        String parentTitle = resultItems.get("parentTitle").toString();
         String content = resultItems.get("content").toString();
 //        StringBuilder msg = new StringBuilder(content);
 //        int i = msg.indexOf("src=\"/assets1");
 //        msg.insert(i-8,"http://www.funtl.com");
         String message;
         message = content.replace("src=\"/assets1","src=\"http://www.funtl.com/assets1");
+        message = message.replaceAll("<svg(([\\s\\S])*?)<\\/svg>"," ");
+        message = message.replaceAll("<div class=\"line-numbers-wrapper\"(([\\s\\S])*?)<\\/div>"," ");
 
 //        Object pic = resultItems.get("picture");
 //        String picture = null;
@@ -38,7 +41,12 @@ public class MyPipeline implements Pipeline {
 //            picture = pic.toString();
 //        }
 
-        File file = new File("D:\\data\\webmagic\\单体应用\\"+title+".md");//保存文件地址
+        File dir = new File("D:\\data\\webmagic\\单体应用\\" + parentTitle);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+
+        File file = new File("D:\\data\\webmagic\\单体应用\\"+parentTitle+"\\"+title+".md");//保存文件地址
         try(FileOutputStream fop = new FileOutputStream(file)) {
             if (!file.exists()) {
                 file.createNewFile();
